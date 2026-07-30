@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Tu Carrito | Perfumería Hades</title>
+  <meta name="description" content="Revisa tu pedido, elige el método de pago y finaliza tu compra por WhatsApp con Perfumería Hades.">
+  <link rel="icon" type="image/svg+xml" href="../img/logo/favicon.svg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       HEADER FIJO
+       ============================================================ -->
+  <header class="header" id="header-principal">
+    <div class="contenedor header__interior">
+      <a href="../index.html" class="logo">
+        <img src="../img/logo/Logo.png" alt="Perfumería Hades">
+      </a>
+
+      <nav class="nav" id="nav-principal">
+        <a href="../index.html" data-pagina="index.html">Inicio</a>
+        <a href="../femeninos/femeninos.html" data-pagina="femeninos.html">Femeninos</a>
+        <a href="../masculinos/masculinos.html" data-pagina="masculinos.html">Masculinos</a>
+        <a href="carrito.html" data-pagina="carrito.html">Carrito</a>
+        <a href="../index.html#contacto">Contacto</a>
+        <a href="carrito.html" class="nav__carrito" aria-label="Ver carrito">
+          🛍️
+          <span id="contador-carrito" class="contador-carrito">0</span>
+        </a>
+      </nav>
+
+      <button class="boton-menu" id="boton-menu" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       CONTENIDO DEL CARRITO
+       ============================================================ -->
+  <section class="pagina-carrito">
+    <div class="contenedor">
+      <div class="encabezado-seccion" style="text-align:left; margin:0 0 40px;">
+        <span class="eyebrow">Paso final</span>
+        <h1 class="titulo-seccion">Tu carrito</h1>
+      </div>
+
+      <!-- Mensaje cuando el carrito está vacío -->
+      <div class="carrito-vacio" id="carrito-vacio" style="display:none;">
+        <h2 class="carrito-vacio__titulo">Tu carrito está vacío</h2>
+        <p class="carrito-vacio__texto">Aún no has agregado ninguna fragancia. Explora nuestras colecciones.</p>
+        <a href="../femeninos/femeninos.html" class="boton boton--dorado">Ver catálogo femenino</a>
+        <a href="../masculinos/masculinos.html" class="boton boton--fantasma" style="margin-left:12px;">Ver catálogo masculino</a>
+      </div>
+
+      <div class="carrito-layout">
+        <!-- Lista de productos en el carrito -->
+        <div class="lista-carrito" id="lista-carrito">
+          <!-- Generado dinámicamente por js/main.js -->
+        </div>
+
+        <!-- Resumen + formulario de pedido -->
+        <div class="carrito-resumen" id="carrito-resumen">
+          <h2 class="carrito-resumen__titulo">Resumen del pedido</h2>
+
+          <div class="fila-total">
+            <span>Subtotal</span>
+            <span id="carrito-subtotal">$0</span>
+          </div>
+          <div class="fila-total">
+            <span>Envío</span>
+            <span>Se coordina por WhatsApp</span>
+          </div>
+          <div class="fila-total fila-total--grande">
+            <span>Total</span>
+            <span id="carrito-total">$0</span>
+          </div>
+
+          <form id="form-pedido" style="display:grid; gap:18px;">
+            <div class="campo">
+              <label for="nombre-cliente">Nombre completo</label>
+              <input type="text" id="nombre-cliente" name="nombre-cliente" placeholder="Ej: Camila Ríos" required>
+            </div>
+
+            <div class="campo">
+              <label for="direccion-cliente">Dirección de entrega</label>
+              <textarea id="direccion-cliente" name="direccion-cliente" rows="2" placeholder="Calle, número, barrio, ciudad" required></textarea>
+            </div>
+
+            <div class="campo">
+              <label>Método de pago</label>
+              <div class="metodos-pago">
+                <label class="metodo-pago">
+                  <input type="radio" name="metodo-pago" value="nequi" checked>
+                  Nequi
+                </label>
+                <div class="detalle-pago" data-pago="nequi">
+                  <strong>Nequi</strong><br>
+                  Número: 300 123 4567<br>
+                  Titular: Perfumería Hades
+                </div>
+
+                <label class="metodo-pago">
+                  <input type="radio" name="metodo-pago" value="bancolombia">
+                  Bancolombia
+                </label>
+                <div class="detalle-pago" data-pago="bancolombia" hidden>
+                  <strong>Bancolombia</strong><br>
+                  Cuenta de ahorros: 123-456789-00<br>
+                  Titular: Perfumería Hades
+                </div>
+
+                <label class="metodo-pago">
+                  <input type="radio" name="metodo-pago" value="contra-entrega">
+                  Pago Contra Entrega
+                </label>
+                <div class="detalle-pago" data-pago="contra-entrega" hidden>
+                  El cliente paga en efectivo o transferencia al momento de
+                  recibir el pedido en la puerta de su casa.
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="boton boton--dorado boton--bloque">
+              Finalizar compra por WhatsApp
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="footer" id="contacto">
+    <div class="contenedor">
+      <div class="footer__grid">
+        <div class="footer__marca">
+          <img src="../img/logo/Logo.png" alt="Perfumería Hades">
+          <p class="footer__descripcion">
+            Fragancias de autor inspiradas en el mito, hechas para quienes
+            dejan huella al entrar a una habitación.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer__titulo">Navegación</h4>
+          <ul class="footer__enlaces">
+            <li><a href="../index.html">Inicio</a></li>
+            <li><a href="../femeninos/femeninos.html">Femeninos</a></li>
+            <li><a href="../masculinos/masculinos.html">Masculinos</a></li>
+            <li><a href="carrito.html">Carrito</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer__titulo">Contáctanos</h4>
+          <ul class="footer__enlaces">
+            <li><a href="https://wa.me/573245477480" target="_blank" rel="noopener">WhatsApp: +57 324 547 7480</a></li>
+            <li><a href="mailto:contacto@perfumeriahades.com">contacto@perfumeriahades.com</a></li>
+          </ul>
+          <div class="footer__redes">
+            <a href="https://wa.me/573245477480" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+            <a href="https://www.instagram.com/hades_perfumeria?igsh=djQzdDA5YmdpNXA5" target="_blank" rel="noopener" aria-label="Instagram">📷</a>
+            <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">📘</a>
+          </div>
+        </div>
+      </div>
+
+      <hr class="footer__linea">
+      <p class="footer__derechos">© 2026 Perfumería Hades. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="../js/productos.js"></script>
+  <script src="../js/carrito.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

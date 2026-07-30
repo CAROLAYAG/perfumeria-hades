@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ===================== SEO BÁSICO ===================== -->
+  <title>Perfumería Hades | Perfumes de lujo para hombre y mujer en Colombia</title>
+  <meta name="description" content="Perfumería Hades: fragancias femeninas y masculinas de alta perfumería. Envíos nacionales, pago contra entrega y atención personalizada por WhatsApp.">
+  <meta name="keywords" content="perfumeria, perfumes, lociones, fragancias, perfumes originales, Hades, perfumes Colombia">
+  <meta property="og:title" content="Perfumería Hades">
+  <meta property="og:description" content="Fragancias de autor con carácter. Descubre el catálogo femenino y masculino de Perfumería Hades.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/svg+xml" href="img/logo/favicon.svg">
+
+  <!-- ===================== TIPOGRAFÍAS ===================== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- ===================== ESTILOS ===================== -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       HEADER FIJO
+       ============================================================ -->
+  <header class="header" id="header-principal">
+    <div class="contenedor header__interior">
+      <a href="index.html" class="logo">
+        <img src="img/logo/Logo.png" alt="Perfumería Hades">
+      </a>
+
+      <nav class="nav" id="nav-principal">
+        <a href="index.html" data-pagina="index.html">Inicio</a>
+        <a href="femeninos/femeninos.html" data-pagina="femeninos.html">Femeninos</a>
+        <a href="masculinos/masculinos.html" data-pagina="masculinos.html">Masculinos</a>
+        <a href="carrito/carrito.html" data-pagina="carrito.html">Carrito</a>
+        <a href="#contacto">Contacto</a>
+        <a href="carrito/carrito.html" class="nav__carrito" aria-label="Ver carrito">
+          🛍️
+          <span id="contador-carrito" class="contador-carrito">0</span>
+        </a>
+      </nav>
+
+      <button class="boton-menu" id="boton-menu" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       HERO PRINCIPAL
+       ============================================================ -->
+  <section class="hero">
+    <img src="img/banners/hero-bottle.svg" alt="" class="hero__fondo" aria-hidden="true">
+    <div class="contenedor hero__interior">
+      <span class="eyebrow">Alta perfumería</span>
+      <h1 class="hero__titulo">El aroma que <em>gobierna</em> la noche</h1>
+      <p class="hero__texto">
+        Fragancias femeninas y masculinas creadas para quienes no pasan
+        desapercibidos. Ingredientes nobles, frascos con carácter y un
+        servicio digno de un trono.
+      </p>
+      <div class="hero__acciones">
+        <a href="#destacados" class="boton boton--dorado">Comprar ahora</a>
+        <a href="femeninos/femeninos.html" class="boton boton--fantasma">Ver catálogo</a>
+      </div>
+    </div>
+    <span class="hero__scroll" aria-hidden="true"></span>
+  </section>
+
+  <!-- Meandro griego: firma visual de la marca -->
+  <div class="franja-meandro" aria-hidden="true">
+    <svg class="meandro" viewBox="0 0 900 30" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10 5 h20 v20 h-10 v-10 h10 M50 5 h20 v20 h-10 v-10 h10 M90 5 h20 v20 h-10 v-10 h10 M130 5 h20 v20 h-10 v-10 h10 M170 5 h20 v20 h-10 v-10 h10 M210 5 h20 v20 h-10 v-10 h10 M250 5 h20 v20 h-10 v-10 h10 M290 5 h20 v20 h-10 v-10 h10 M330 5 h20 v20 h-10 v-10 h10 M370 5 h20 v20 h-10 v-10 h10 M410 5 h20 v20 h-10 v-10 h10 M450 5 h20 v20 h-10 v-10 h10 M490 5 h20 v20 h-10 v-10 h10 M530 5 h20 v20 h-10 v-10 h10 M570 5 h20 v20 h-10 v-10 h10 M610 5 h20 v20 h-10 v-10 h10 M650 5 h20 v20 h-10 v-10 h10 M690 5 h20 v20 h-10 v-10 h10 M730 5 h20 v20 h-10 v-10 h10 M770 5 h20 v20 h-10 v-10 h10 M810 5 h20 v20 h-10 v-10 h10 M850 5 h20 v20 h-10 v-10 h10"
+        fill="none" stroke="#b8935a" stroke-width="1.4"/>
+    </svg>
+  </div>
+
+  <!-- ============================================================
+       CATEGORÍAS PRINCIPALES
+       ============================================================ -->
+  <section class="categorias">
+    <div class="contenedor">
+      <div class="encabezado-seccion">
+        <span class="eyebrow">Colecciones</span>
+        <h2 class="titulo-seccion">Dos mundos, un mismo carácter</h2>
+        <p class="subtitulo-seccion" style="margin:0 auto;">
+          Explora nuestras lociones femeninas y masculinas, cada una con su
+          propia identidad olfativa.
+        </p>
+      </div>
+
+      <div class="categorias__grid">
+        <a href="femeninos/femeninos.html" class="tarjeta-categoria animar-entrada">
+          <img src="img/banners/categoria-femenino.svg" alt="Lociones femeninas Hades">
+          <div class="tarjeta-categoria__contenido">
+            <span class="tarjeta-categoria__eyebrow">Colección</span>
+            <h3 class="tarjeta-categoria__titulo">Lociones Femeninas</h3>
+            <span class="tarjeta-categoria__enlace">Explorar →</span>
+          </div>
+        </a>
+
+        <a href="masculinos/masculinos.html" class="tarjeta-categoria animar-entrada">
+          <img src="img/banners/categoria-masculino.svg" alt="Lociones masculinas Hades">
+          <div class="tarjeta-categoria__contenido">
+            <span class="tarjeta-categoria__eyebrow">Colección</span>
+            <h3 class="tarjeta-categoria__titulo">Lociones Masculinas</h3>
+            <span class="tarjeta-categoria__enlace">Explorar →</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PRODUCTOS DESTACADOS
+       ============================================================ -->
+  <section class="productos" id="destacados">
+    <div class="contenedor">
+      <div class="encabezado-seccion">
+        <span class="eyebrow">Selección</span>
+        <h2 class="titulo-seccion">Productos destacados</h2>
+        <p class="subtitulo-seccion" style="margin:0 auto;">
+          Las fragancias más pedidas de la casa Hades, elegidas por su
+          proyección y personalidad.
+        </p>
+      </div>
+
+      <div class="grid-productos" id="productos-destacados">
+        <!-- Las tarjetas se generan dinámicamente desde js/main.js + js/productos.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       BENEFICIOS
+       ============================================================ -->
+  <section class="beneficios">
+    <div class="contenedor beneficios__grid">
+      <div class="animar-entrada">
+        <div class="beneficio__icono">🚚</div>
+        <h3 class="beneficio__titulo">Envíos nacionales</h3>
+        <p class="beneficio__texto">Llegamos a cualquier ciudad de Colombia en 24-72 horas.</p>
+      </div>
+      <div class="animar-entrada">
+        <div class="beneficio__icono">🔒</div>
+        <h3 class="beneficio__titulo">Pago seguro</h3>
+        <p class="beneficio__texto">Transferencias verificadas por Nequi y Bancolombia.</p>
+      </div>
+      <div class="animar-entrada">
+        <div class="beneficio__icono">💵</div>
+        <h3 class="beneficio__titulo">Pago contra entrega</h3>
+        <p class="beneficio__texto">Paga cuando recibas tu pedido en la puerta de tu casa.</p>
+      </div>
+      <div class="animar-entrada">
+        <div class="beneficio__icono">💬</div>
+        <h3 class="beneficio__titulo">Atención personalizada</h3>
+        <p class="beneficio__texto">Te asesoramos por WhatsApp antes y después de tu compra.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="footer" id="contacto">
+    <div class="contenedor">
+      <div class="footer__grid">
+        <div class="footer__marca">
+          <img src="img/logo/logo.png" alt="Perfumería Hades">
+          <p class="footer__descripcion">
+            Fragancias de autor inspiradas en el mito, hechas para quienes
+            dejan huella al entrar a una habitación.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer__titulo">Navegación</h4>
+          <ul class="footer__enlaces">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="femeninos/femeninos.html">Femeninos</a></li>
+            <li><a href="masculinos/masculinos.html">Masculinos</a></li>
+            <li><a href="carrito/carrito.html">Carrito</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer__titulo">Contáctanos</h4>
+          <ul class="footer__enlaces">
+            <li><a href="https://wa.me/573245477480" target="_blank" rel="noopener">WhatsApp: +57 324 547 7480 </a></li>
+            <li><a href="mailto:contacto@perfumeriahades.com">contacto@perfumeriahades.com</a></li>
+          </ul>
+          <div class="footer__redes">
+            <a href="https://wa.me/573245477480" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+            <a href="https://www.instagram.com/hades_perfumeria?igsh=djQzdDA5YmdpNXA5" target="_blank" rel="noopener" aria-label="Instagram">📷</a>
+            <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">📘</a>
+          </div>
+        </div>
+      </div>
+
+      <hr class="footer__linea">
+      <p class="footer__derechos">© 2026 Perfumería Hades. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       MODAL DE FICHA RÁPIDA DE PRODUCTO
+       ============================================================ -->
+  <div class="modal-producto" id="modal-producto">
+    <div class="modal-producto__caja">
+      <button class="modal-producto__cerrar" data-cerrar-modal aria-label="Cerrar">✕</button>
+      <img src="" alt="" class="modal-producto__imagen">
+      <div class="modal-producto__info">
+        <span class="modal-producto__familia"></span>
+        <h3 class="modal-producto__nombre"></h3>
+        <p class="modal-producto__descripcion"></p>
+        <div class="modal-producto__presentaciones"></div>
+        <span class="modal-producto__precio"></span>
+        <button class="boton boton--dorado boton--bloque" data-agregar-desde-modal>Agregar al carrito</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== SCRIPTS ===================== -->
+  <script src="js/productos.js"></script>
+  <script src="js/carrito.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

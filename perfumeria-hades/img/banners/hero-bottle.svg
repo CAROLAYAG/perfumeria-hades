@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1000" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <radialGradient id="glow" cx="60%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#2a2118"/>
+      <stop offset="60%" stop-color="#0b0b0d"/>
+      <stop offset="100%" stop-color="#000"/>
+    </radialGradient>
+    <linearGradient id="bottleGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e3c88f"/>
+      <stop offset="100%" stop-color="#b8935a"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="1000" fill="url(#glow)"/>
+
+  <!-- botella central grande -->
+  <g transform="translate(450,470)">
+    <rect x="-70" y="-40" width="140" height="260" rx="14" fill="none" stroke="url(#bottleGrad)" stroke-width="2.5"/>
+    <rect x="-30" y="-100" width="60" height="70" rx="8" fill="none" stroke="url(#bottleGrad)" stroke-width="2.5"/>
+    <rect x="-18" y="-130" width="36" height="34" rx="4" fill="url(#bottleGrad)"/>
+    <line x1="-70" y1="30" x2="70" y2="30" stroke="#b8935a" stroke-width="1" opacity="0.5"/>
+    <text x="0" y="90" font-family="Cinzel, serif" font-size="18" letter-spacing="3" fill="#e3c88f" text-anchor="middle" opacity="0.9">HADES</text>
+  </g>
+
+  <!-- botellas laterales, más pequeñas y difusas -->
+  <g transform="translate(190,560)" opacity="0.35">
+    <rect x="-45" y="-25" width="90" height="170" rx="10" fill="none" stroke="#f2ede4" stroke-width="1.5"/>
+    <rect x="-20" y="-65" width="40" height="45" rx="6" fill="none" stroke="#f2ede4" stroke-width="1.5"/>
+  </g>
+  <g transform="translate(700,540)" opacity="0.35">
+    <rect x="-45" y="-25" width="90" height="170" rx="10" fill="none" stroke="#f2ede4" stroke-width="1.5"/>
+    <rect x="-20" y="-65" width="40" height="45" rx="6" fill="none" stroke="#f2ede4" stroke-width="1.5"/>
+  </g>
+
+  <path d="M300.0 860 h9 v9 h-4.5 v-4.5 h4.5" fill="none" stroke="#b8935a" stroke-width="1.4" opacity="0.4"/>
+<path d="M325.0 860 h9 v9 h-4.5 v-4.5 h4.5" fill="none" stroke="#b8935a" stroke-width="1.4" opacity="0.4"/>
+<path d="M350.0 860 h9 v9 h-4.5 v-4.5 h4.5" fill="none" stroke="#b8935a" stroke-width="1.4" opacity="0.4"/>
+<path d="M375.0 860 h9 v9 h-4.5 v-4.5 h4.5" fill="none" stroke="#b8935a" stroke-width="1.4" opacity="0.4"/>
+<path d="M400.0 860 h9 v9 h-4.5 v-4.5 h4.5" fill="none" stroke="#b8935a" stroke-width="1.4" opacity="0.4"/>
+<path d="M425.0 860 h9 v9 h-4.5 v-4.5 h4.5" fill="none" stroke="#b8935a" stroke-width="1.4" opacity="0.4"/>
+<path d="M450.0 860 h9 v9 h-4.5 v-4.5 h4.5" fill="none" stroke="#b8935a" stroke-width="1.4" opacity="0.4"/>
+<path d="M475.0 860 h9 v9 h-4.5 v-4.5 h4.5" fill="none" stroke="#b8935a" stroke-width="1.4" opacity="0.4"/>
+<path d="M500.0 860 h9 v9 h-4.5 v-4.5 h4.5" fill="none" stroke="#b8935a" stroke-width="1.4" opacity="0.4"/>
+<path d="M525.0 860 h9 v9 h-4.5 v-4.5 h4.5" fill="none" stroke="#b8935a" stroke-width="1.4" opacity="0.4"/>
+<path d="M550.0 860 h9 v9 h-4.5 v-4.5 h4.5" fill="none" stroke="#b8935a" stroke-width="1.4" opacity="0.4"/>
+<path d="M575.0 860 h9 v9 h-4.5 v-4.5 h4.5" fill="none" stroke="#b8935a" stroke-width="1.4" opacity="0.4"/>
+</svg>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Lociones Masculinas | Perfumería Hades</title>
+  <meta name="description" content="Catálogo completo de perfumes masculinos de Perfumería Hades: amaderado, especiado, fresco y más. Agrega al carrito y pide por WhatsApp.">
+  <link rel="icon" type="image/svg+xml" href="../img/logo/Logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       HEADER FIJO
+       ============================================================ -->
+  <header class="header" id="header-principal">
+    <div class="contenedor header__interior">
+      <a href="../index.html" class="logo">
+        <img src="../img/logo/Logo.png" alt="Perfumería Hades">
+      </a>
+
+      <nav class="nav" id="nav-principal">
+        <a href="../index.html" data-pagina="index.html">Inicio</a>
+        <a href="../femeninos/femeninos.html" data-pagina="femeninos.html">Femeninos</a>
+        <a href="masculinos.html" data-pagina="masculinos.html">Masculinos</a>
+        <a href="../carrito/carrito.html" data-pagina="carrito.html">Carrito</a>
+        <a href="../index.html#contacto">Contacto</a>
+        <a href="../carrito/carrito.html" class="nav__carrito" aria-label="Ver carrito">
+          🛍️
+          <span id="contador-carrito" class="contador-carrito">0</span>
+        </a>
+      </nav>
+
+      <button class="boton-menu" id="boton-menu" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       ENCABEZADO DE CATÁLOGO
+       ============================================================ -->
+  <section class="pagina-catalogo__hero">
+    <img src="../img/banners/categoria-masculino.svg" alt="" class="pagina-catalogo__fondo" aria-hidden="true">
+    <div class="contenedor pagina-catalogo__contenido">
+      <span class="eyebrow">Colección</span>
+      <h1 class="pagina-catalogo__titulo">Lociones Masculinas</h1>
+      <p class="pagina-catalogo__texto">
+        Del roble profundo al acero del Olimpo: fragancias con la fuerza
+        de quien gobierna su propio camino.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CATÁLOGO
+       ============================================================ -->
+  <section class="productos" style="padding-top:0;">
+    <div class="contenedor">
+      <div class="filtros-catalogo" id="filtros-masculino">
+  <input type="text" class="filtro-buscar" placeholder="Buscar por nombre o familia olfativa...">
+
+  <div class="filtros-catalogo__precio">
+    <span class="filtros-catalogo__etiqueta">Precio (5ml)</span>
+    <input type="number" class="filtro-precio-min" placeholder="Mín" min="0">
+    <span>—</span>
+    <input type="number" class="filtro-precio-max" placeholder="Máx" min="0">
+  </div>
+
+  <label class="filtros-catalogo__checkbox">
+    <input type="checkbox" class="filtro-destacados">
+    Solo destacados
+  </label>
+
+  <select class="filtro-orden">
+    <option value="">Ordenar por</option>
+    <option value="precio-asc">Precio: menor a mayor</option>
+    <option value="precio-desc">Precio: mayor a menor</option>
+  </select>
+</div>
+      <div class="catalogo-grid" id="grid-masculinos">
+        <!-- Tarjetas generadas dinámicamente desde js/main.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="footer" id="contacto">
+    <div class="contenedor">
+      <div class="footer__grid">
+        <div class="footer__marca">
+          <img src="../img/logo/Logo.png" alt="Perfumería Hades">
+          <p class="footer__descripcion">
+            Fragancias de autor inspiradas en el mito, hechas para quienes
+            dejan huella al entrar a una habitación.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer__titulo">Navegación</h4>
+          <ul class="footer__enlaces">
+            <li><a href="../index.html">Inicio</a></li>
+            <li><a href="../femeninos/femeninos.html">Femeninos</a></li>
+            <li><a href="masculinos.html">Masculinos</a></li>
+            <li><a href="../carrito/carrito.html">Carrito</a></li>
+          </ul>
+        </div>
+
+       <div>
+          <h4 class="footer__titulo">Contáctanos</h4>
+          <ul class="footer__enlaces">
+            <li><a href="https://wa.me/573245477480" target="_blank" rel="noopener">WhatsApp: +57 324 547 7480 </a></li>
+            <li><a href="mailto:contacto@perfumeriahades.com">contacto@perfumeriahades.com</a></li>
+          </ul>
+          <div class="footer__redes">
+            <a href="https://wa.me/573245477480" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+            <a href="https://www.instagram.com/hades_perfumeria?igsh=djQzdDA5YmdpNXA5" target="_blank" rel="noopener" aria-label="Instagram">📷</a>
+            <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">📘</a>
+          </div>
+        </div>
+      </div>
+
+      <hr class="footer__linea">
+      <p class="footer__derechos">© 2026 Perfumería Hades. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       MODAL DE FICHA RÁPIDA DE PRODUCTO
+       ============================================================ -->
+  <div class="modal-producto" id="modal-producto">
+    <div class="modal-producto__caja">
+      <button class="modal-producto__cerrar" data-cerrar-modal aria-label="Cerrar">✕</button>
+      <img src="" alt="" class="modal-producto__imagen">
+      <div class="modal-producto__info">
+        <span class="modal-producto__familia"></span>
+        <h3 class="modal-producto__nombre"></h3>
+        <p class="modal-producto__descripcion"></p>
+        <div class="modal-producto__presentaciones"></div>
+        <span class="modal-producto__precio"></span>
+        <button class="boton boton--dorado boton--bloque" data-agregar-desde-modal>Agregar al carrito</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/productos.js"></script>
+  <script src="../js/carrito.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,187 @@
+/* ==========================================================================
+   RESPONSIVE.CSS
+   --------------------------------------------------------------------------
+   Ajustes por tamaño de pantalla. Se cargan DESPUÉS de style.css, así que
+   estas reglas tienen prioridad dentro de cada breakpoint.
+   Puntos de quiebre cubiertos: 1920px (escritorio grande, base),
+   1024px (tablet horizontal / laptop pequeño), 768px (tablet vertical),
+   320px (celular).
+   ========================================================================== */
+
+/* -------------------- Pantallas grandes (>1400px) ------------------------ */
+@media (min-width: 1400px) {
+  .contenedor {
+    padding: 0 40px;
+  }
+}
+
+/* -------------------- Hasta 1024px (tablets / laptops chicos) ------------ */
+@media (max-width: 1024px) {
+  .grid-productos,
+  .catalogo-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .beneficios__grid {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 40px;
+  }
+
+  .footer__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .footer__marca {
+    grid-column: 1 / -1;
+  }
+
+  .carrito-layout {
+    grid-template-columns: 1fr;
+  }
+  .carrito-resumen {
+    position: static;
+  }
+
+  .modal-producto__caja {
+    grid-template-columns: 1fr;
+  }
+  .modal-producto__imagen {
+    max-height: 260px;
+  }
+}
+
+/* -------------------- Hasta 768px (tablet vertical) ----------------------- */
+@media (max-width: 768px) {
+  .nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: min(320px, 80vw);
+    background: var(--ash);
+    border-left: 1px solid rgba(184,147,90,0.2);
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 30px;
+    padding: 40px;
+    transform: translateX(100%);
+    transition: transform var(--transicion);
+    z-index: 100;
+  }
+  .nav.abierto {
+    transform: translateX(0);
+  }
+  .nav a {
+    font-size: 1rem;
+  }
+
+  .boton-menu {
+    display: flex;
+  }
+
+  .hero {
+    min-height: 92vh;
+    text-align: left;
+  }
+  .hero__interior {
+    padding-top: 130px;
+  }
+
+  .categorias__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .grid-productos,
+  .catalogo-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .beneficios__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+
+  .linea-carrito {
+    grid-template-columns: 60px 1fr;
+    grid-template-areas:
+      "imagen info"
+      "imagen cantidad"
+      "imagen subtotal";
+    row-gap: 10px;
+  }
+  .linea-carrito__imagen { grid-area: imagen; width: 60px; height: 60px; }
+  .linea-carrito__info { grid-area: info; }
+  .linea-carrito__cantidad { grid-area: cantidad; justify-self: start; }
+  .linea-carrito__subtotal { grid-area: subtotal; }
+  .linea-carrito__eliminar {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+  }
+  .linea-carrito {
+    position: relative;
+  }
+}
+
+/* -------------------- Hasta 480px (celulares) ----------------------------- */
+@media (max-width: 480px) {
+  .contenedor {
+    padding: 0 18px;
+  }
+
+  .hero__titulo {
+    font-size: 2.4rem;
+  }
+  .hero__acciones {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .hero__acciones .boton {
+    width: 100%;
+  }
+
+  .encabezado-seccion {
+    margin-bottom: 34px;
+  }
+
+  .tarjeta-producto__pie {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .tarjeta-producto__botones {
+    width: 100%;
+  }
+  .tarjeta-producto__botones .boton {
+    flex: 1;
+  }
+
+  .modal-producto__info {
+    padding: 24px;
+  }
+
+  .carrito-resumen {
+    padding: 22px;
+  }
+
+  .pagina-catalogo__hero {
+    padding: 140px 0 50px;
+  }
+}
+
+/* -------------------- Hasta 320px (celulares muy pequeños) ---------------- */
+@media (max-width: 340px) {
+  .hero__titulo {
+    font-size: 2rem;
+  }
+  .logo img {
+    height: 38px;
+  }
+  .boton {
+    padding: 13px 22px;
+    font-size: 0.78rem;
+  }
+}
