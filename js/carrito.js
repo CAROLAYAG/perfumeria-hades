@@ -51,7 +51,7 @@ function agregarAlCarrito(idProducto, indicePresentacion = 0, cantidad = 1) {
       nombre: producto.nombre,
       presentacion: opcionPrecio.presentacion,
       precio: opcionPrecio.precio,
-      imagen: producto.imagen.replace("../", ""),
+      imagen: producto.imagen_url,
       cantidad: cantidad
     });
   }
@@ -129,4 +129,7 @@ function vaciarCarrito() {
 }
 
 /* Al cargar cualquier página, sincroniza el contador del header. */
-document.addEventListener("DOMContentLoaded", actualizarContadorCarrito);
+document.addEventListener("DOMContentLoaded", async () => {
+  await cargarProductos();
+  renderizarCarrito();
+});

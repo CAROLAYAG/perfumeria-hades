@@ -1,0 +1,126 @@
+.oculto { display: none !important; }
+
+.admin-body {
+  background: var(--obsidian);
+  color: var(--bone);
+  font-family: inherit;
+  min-height: 100vh;
+}
+
+.admin-login {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-login__caja {
+  background: var(--ash, #1a1a1e);
+  border: 1px solid rgba(184,147,90,0.25);
+  border-radius: var(--radio-md);
+  padding: 32px;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: center;
+}
+
+.admin-login__subtitulo { opacity: 0.7; margin-bottom: 10px; }
+.admin-login__error { color: #e05252; font-size: 0.85rem; min-height: 18px; }
+
+.admin-login__caja input {
+  background: var(--obsidian);
+  border: 1px solid rgba(184,147,90,0.3);
+  border-radius: var(--radio-sm);
+  padding: 10px;
+  color: var(--bone);
+}
+
+.admin-panel { max-width: 1100px; margin: 0 auto; padding: 32px 20px; }
+
+.admin-panel__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.admin-mensaje {
+  padding: 10px 14px;
+  border-radius: var(--radio-sm);
+  margin-bottom: 16px;
+  font-size: 0.85rem;
+}
+.admin-mensaje--exito { background: rgba(90,184,120,0.15); color: #7fd99c; }
+.admin-mensaje--error { background: rgba(224,82,82,0.15); color: #e05252; }
+
+.admin-tabla { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+.admin-tabla th { text-align: left; padding: 10px; color: var(--gold); border-bottom: 1px solid rgba(184,147,90,0.2); }
+.admin-tabla td { padding: 10px; border-bottom: 1px solid rgba(184,147,90,0.1); vertical-align: middle; }
+.admin-tabla__miniatura { width: 40px; height: 40px; object-fit: cover; border-radius: 6px; }
+
+.admin-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s;
+  z-index: 300;
+}
+.admin-modal.abierto { opacity: 1; pointer-events: all; }
+
+.admin-modal__caja {
+  background: var(--ash, #1a1a1e);
+  border: 1px solid rgba(184,147,90,0.25);
+  border-radius: var(--radio-md);
+  padding: 28px;
+  width: 420px;
+  max-height: 85vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.admin-modal__cerrar {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: none;
+  border: none;
+  color: var(--bone);
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+#form-producto { display: flex; flex-direction: column; gap: 6px; margin-top: 14px; }
+#form-producto label { font-size: 0.78rem; color: var(--gold); margin-top: 8px; }
+#form-producto input[type="text"],
+#form-producto input[type="number"],
+#form-producto input[type="file"],
+#form-producto select,
+#form-producto textarea {
+  background: var(--obsidian);
+  border: 1px solid rgba(184,147,90,0.3);
+  border-radius: var(--radio-sm);
+  padding: 9px;
+  color: var(--bone);
+  font-size: 0.85rem;
+}
+
+.admin-checkbox { display: flex; align-items: center; gap: 8px; flex-direction: row; }
+.admin-preview-imagen { width: 100%; max-height: 140px; object-fit: cover; border-radius: var(--radio-sm); margin-top: 6px; }
+.admin-ayuda { font-size: 0.72rem; opacity: 0.6; }
+
+.admin-fila-precio { display: flex; gap: 6px; margin-top: 6px; }
+.admin-fila-precio .precio-presentacion { flex: 2; }
+.admin-fila-precio .precio-valor,
+.admin-fila-precio .precio-stock { flex: 1; }
+
+.admin-fila-precio__borrar { background: none; border: none; color: #e05252; cursor: pointer; }
+
+.admin-form-botones { display: flex; justify-content: space-between; margin-top: 18px; }
+.admin-boton-peligro { color: #e05252 !important; border-color: #e05252 !important; }

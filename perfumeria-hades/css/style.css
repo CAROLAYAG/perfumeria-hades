@@ -1162,29 +1162,3 @@ body.bloquear-scroll {
   padding: 40px 0;
   font-size: 0.95rem;
 }
-.chip-presentacion.agotado {
-  opacity: 0.35;
-  text-decoration: line-through;
-  cursor: not-allowed;
-}
-.chip-presentacion:disabled {
-  pointer-events: none;
-}
-
-.etiqueta-agotado {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  background: rgba(20, 20, 22, 0.85);
-  color: var(--bone);
-  border: 1px solid rgba(224, 82, 82, 0.5);
-  padding: 4px 10px;
-  border-radius: 999px;
-  font-size: 0.7rem;
-  letter-spacing: 0.03em;
-}
-
-.boton--dorado:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}

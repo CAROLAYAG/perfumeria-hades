@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Panel de administración — Perfumería Hades</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin-body">
+
+  <!-- ============ PANTALLA DE LOGIN ============ -->
+  <section id="pantalla-login" class="admin-login">
+    <form id="form-login" class="admin-login__caja">
+      <h1>Perfumería Hades</h1>
+      <p class="admin-login__subtitulo">Panel de administración</p>
+      <input type="email" id="login-email" placeholder="Correo" required>
+      <input type="password" id="login-password" placeholder="Contraseña" required>
+      <button type="submit" class="boton boton--dorado">Entrar</button>
+      <p id="login-error" class="admin-login__error"></p>
+    </form>
+  </section>
+
+  <!-- ============ PANEL (oculto hasta hacer login) ============ -->
+  <section id="panel-admin" class="admin-panel oculto">
+    <header class="admin-panel__header">
+      <h1>Productos</h1>
+      <div>
+        <button id="boton-nuevo-producto" class="boton boton--dorado boton--sm">+ Nuevo producto</button>
+        <button id="boton-logout" class="boton boton--fantasma boton--sm">Cerrar sesión</button>
+      </div>
+    </header>
+
+    <div id="admin-mensaje" class="admin-mensaje oculto"></div>
+
+    <table class="admin-tabla">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Nombre</th>
+          <th>Categoría</th>
+          <th>Familia</th>
+          <th>Precio 5ml</th>
+          <th>Destacado</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="admin-tabla-cuerpo"></tbody>
+    </table>
+  </section>
+
+  <!-- ============ MODAL: FORMULARIO AGREGAR/EDITAR ============ -->
+  <div id="modal-form-producto" class="admin-modal">
+    <div class="admin-modal__caja">
+      <button id="cerrar-modal-form" class="admin-modal__cerrar">✕</button>
+      <h2 id="modal-form-titulo">Nuevo producto</h2>
+
+      <form id="form-producto">
+        <input type="hidden" id="campo-id">
+
+        <label>Nombre</label>
+        <input type="text" id="campo-nombre" required>
+
+        <label>Categoría</label>
+        <select id="campo-categoria" required>
+          <option value="femenino">Femenino</option>
+          <option value="masculino">Masculino</option>
+        </select>
+
+        <label>Familia olfativa</label>
+        <input type="text" id="campo-familia" placeholder="Ej: Floral Amaderado" required>
+
+        <label>Descripción (usa Enter para saltos de línea: Notas de salida / Corazón / Base)</label>
+        <textarea id="campo-descripcion" rows="4" required></textarea>
+
+        <label class="admin-checkbox">
+          <input type="checkbox" id="campo-destacado">
+          Producto destacado (aparece en el home)
+        </label>
+
+        <label>Imagen del producto</label>
+        <input type="file" id="campo-imagen" accept="image/*">
+        <img id="preview-imagen" class="admin-preview-imagen oculto" alt="Vista previa">
+        <p class="admin-ayuda">Deja este campo vacío si estás editando y no quieres cambiar la imagen actual.</p>
+
+        <label>Precios por presentación</label>
+        <div id="lista-precios"></div>
+        <button type="button" id="boton-agregar-precio" class="boton boton--fantasma boton--sm">+ Agregar presentación</button>
+
+        <div class="admin-form-botones">
+          <button type="submit" class="boton boton--dorado">Guardar</button>
+          <button type="button" id="boton-eliminar-producto" class="boton boton--fantasma admin-boton-peligro oculto">Eliminar producto</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

@@ -96,39 +96,8 @@
               <textarea id="direccion-cliente" name="direccion-cliente" rows="2" placeholder="Calle, número, barrio, ciudad" required></textarea>
             </div>
 
-            <div class="campo">
-              <label>Método de pago</label>
-              <div class="metodos-pago">
-                <label class="metodo-pago">
-                  <input type="radio" name="metodo-pago" value="nequi" checked>
-                  Nequi
-                </label>
-                <div class="detalle-pago" data-pago="nequi">
-                  <strong>Nequi</strong><br>
-                  Número: 300 123 4567<br>
-                  Titular: Perfumería Hades
-                </div>
-
-                <label class="metodo-pago">
-                  <input type="radio" name="metodo-pago" value="bancolombia">
-                  Bancolombia
-                </label>
-                <div class="detalle-pago" data-pago="bancolombia" hidden>
-                  <strong>Bancolombia</strong><br>
-                  Cuenta de ahorros: 123-456789-00<br>
-                  Titular: Perfumería Hades
-                </div>
-
-                <label class="metodo-pago">
-                  <input type="radio" name="metodo-pago" value="contra-entrega">
-                  Pago Contra Entrega
-                </label>
-                <div class="detalle-pago" data-pago="contra-entrega" hidden>
-                  El cliente paga en efectivo o transferencia al momento de
-                  recibir el pedido en la puerta de su casa.
-                </div>
-              </div>
-            </div>
+            
+             
 
             <button type="submit" class="boton boton--dorado boton--bloque">
               Finalizar compra por WhatsApp
@@ -181,7 +150,10 @@
       <p class="footer__derechos">© 2026 Perfumería Hades. Todos los derechos reservados.</p>
     </div>
   </footer>
+  
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/supabase-config.js"></script>
   <script src="../js/productos.js"></script>
   <script src="../js/carrito.js"></script>
   <script src="../js/main.js"></script>

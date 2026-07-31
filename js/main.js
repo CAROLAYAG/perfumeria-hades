@@ -11,9 +11,11 @@
 
 /* ⚠️ CAMBIA AQUÍ el número de WhatsApp de la tienda (con indicativo de país,
    sin "+" ni espacios). Este único valor alimenta todo el sitio. */
-const WHATSAPP_NUMERO = "573177645312";
+const WHATSAPP_NUMERO = "573245477480";
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  await cargarProductos();
+
   initMenuMovil();
   initHeaderScroll();
   initAnimacionesAlEntrar();
@@ -27,7 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initFiltrosCatalogo("femenino", "grid-femeninos", "filtros-femenino");
   initFiltrosCatalogo("masculino", "grid-masculinos", "filtros-masculino");
 });
-
 /* --------------------------------------------------------------------------
    MENÚ MÓVIL (hamburguesa)
    -------------------------------------------------------------------------- */
@@ -141,24 +142,25 @@ function descripcionConSaltos(texto) {
    (que usan ../img). PRODUCTOS.imagen ya trae la ruta correcta relativa
    a /femeninos o /masculinos; en home la ajustamos on-the-fly.
    -------------------------------------------------------------------------- */
-function tarjetaProducto(producto, { rutaImagenDesdeRaiz = false } = {}) {
-  const imagen = rutaImagenDesdeRaiz
-    ? producto.imagen.replace("../", "")
-    : producto.imagen;
-
+function tarjetaProducto(producto) {
   const chips = producto.precios
     .map((p, i) => `
-      <button type="button" class="chip-presentacion${i === 0 ? " activo" : ""}" data-chip-presentacion="${i}">
+      <button type="button"
+        class="chip-presentacion${i === 0 ? " activo" : ""}${p.stock <= 0 ? " agotado" : ""}"
+        data-chip-presentacion="${i}"
+        ${p.stock <= 0 ? "disabled" : ""}>
         ${p.presentacion.replace("Decant ", "").replace("Botella ", "")}
       </button>`)
     .join("");
+    const todoAgotado = producto.precios.every((p) => p.stock <= 0);
 
   return `
     <article class="tarjeta-producto animar-entrada" data-presentacion-seleccionada="0">
       <div class="tarjeta-producto__imagen-wrap">
-        <img src="${imagen}" alt="${producto.nombre}, perfume ${producto.categoria}" loading="lazy" class="tarjeta-producto__imagen">
-        ${producto.destacado ? '<span class="etiqueta-destacado">Destacado</span>' : ""}
-      </div>
+  <img src="${producto.imagen_url}" alt="${producto.nombre}, perfume ${producto.categoria}" loading="lazy" class="tarjeta-producto__imagen">
+  ${producto.destacado && !todoAgotado ? '<span class="etiqueta-destacado">Destacado</span>' : ""}
+  ${todoAgotado ? '<span class="etiqueta-agotado">Agotado</span>' : ""}
+</div>
       <div class="tarjeta-producto__info">
         <span class="tarjeta-producto__familia">${producto.familia}</span>
         <h3 class="tarjeta-producto__nombre">${producto.nombre}</h3>
@@ -172,7 +174,7 @@ function tarjetaProducto(producto, { rutaImagenDesdeRaiz = false } = {}) {
           <span class="tarjeta-producto__precio" data-precio-mostrado="${producto.id}">${formatearPrecio(producto.precios[0].precio)}</span>
           <div class="tarjeta-producto__botones">
             <button class="boton boton--fantasma boton--sm" data-ver-producto="${producto.id}">Ver producto</button>
-            <button class="boton boton--dorado boton--sm" data-agregar-carrito="${producto.id}">Agregar</button>
+            <button class="boton boton--dorado boton--sm" data-agregar-carrito="${producto.id}" ${todoAgotado ? "disabled" : ""}>Agregar</button>
           </div>
         </div>
       </div>
@@ -180,11 +182,13 @@ function tarjetaProducto(producto, { rutaImagenDesdeRaiz = false } = {}) {
 }
 
 function activarChipsPresentacion(contenedor) {
-  contenedor.querySelectorAll("[data-grupo-presentacion]").forEach((grupo) => {
+  contenedor.querySelectorAll(".tarjeta-producto").forEach((tarjeta) => {
+    const grupo = tarjeta.querySelector("[data-grupo-presentacion]");
+    if (!grupo) return;
+
     const idProducto = grupo.dataset.grupoPresentacion;
     const producto = buscarProductoPorId(idProducto);
-    const tarjeta = grupo.closest(".tarjeta-producto");
-    const precioEl = contenedor.querySelector(`[data-precio-mostrado="${idProducto}"]`);
+    const precioEl = tarjeta.querySelector("[data-precio-mostrado]");
 
     grupo.querySelectorAll("[data-chip-presentacion]").forEach((chip) => {
       chip.addEventListener("click", () => {
@@ -193,8 +197,11 @@ function activarChipsPresentacion(contenedor) {
         grupo.querySelectorAll("[data-chip-presentacion]").forEach((c) => c.classList.remove("activo"));
         chip.classList.add("activo");
 
-        if (tarjeta) tarjeta.dataset.presentacionSeleccionada = indice;
-        if (precioEl && producto) precioEl.textContent = formatearPrecio(producto.precios[indice].precio);
+        tarjeta.dataset.presentacionSeleccionada = indice;
+        if (precioEl && producto) {
+          const opcion = producto.precios[indice];
+          precioEl.textContent = opcion.stock > 0 ? formatearPrecio(opcion.precio) : "Agotado";
+        }
       });
     });
   });
@@ -209,7 +216,7 @@ function renderizarDestacados() {
 
   const destacados = PRODUCTOS.filter((p) => p.destacado);
   contenedor.innerHTML = destacados
-    .map((p) => tarjetaProducto(p, { rutaImagenDesdeRaiz: true }))
+    .map((p) => tarjetaProducto(p))
     .join("");
 
   observarAnimaciones(contenedor); // sin esto, las tarjetas quedan en opacity:0 para siempre
@@ -305,6 +312,13 @@ function activarBotonesDeCarrito(contenedor) {
       const idProducto = Number(boton.dataset.agregarCarrito);
       const tarjeta = boton.closest(".tarjeta-producto");
       const indice = tarjeta ? Number(tarjeta.dataset.presentacionSeleccionada || 0) : 0;
+
+      const producto = buscarProductoPorId(idProducto);
+      if (producto && producto.precios[indice].stock <= 0) {
+        alert("Esta presentación está agotada. Elige otra.");
+        return;
+      }
+
       agregarAlCarrito(idProducto, indice);
     });
   });
@@ -334,14 +348,18 @@ function initModalProducto() {
     if (e.key === "Escape") cerrarModalProducto();
   });
 }
+function rutaImagenParaPaginaActual(imagen) {
+  const enSubcarpeta = /\/(femeninos|masculinos|carrito)\//.test(window.location.pathname);
+  return enSubcarpeta ? imagen : imagen.replace("../", "");
+}
 
 function abrirModalProducto(id) {
   const modal = document.getElementById("modal-producto");
   const producto = buscarProductoPorId(id);
+ 
   if (!modal || !producto) return;
 
-  const imagen = producto.imagen.replace("../", "");
-  modal.querySelector(".modal-producto__imagen").src = imagen;
+ modal.querySelector(".modal-producto__imagen").src = producto.imagen_url;
   modal.querySelector(".modal-producto__imagen").alt = producto.nombre;
   modal.querySelector(".modal-producto__familia").textContent = producto.familia;
   modal.querySelector(".modal-producto__nombre").textContent = producto.nombre;
@@ -350,13 +368,16 @@ function abrirModalProducto(id) {
   const grupoPresentacion = modal.querySelector(".modal-producto__presentaciones");
   grupoPresentacion.innerHTML = producto.precios
     .map((p, i) => `
-      <button type="button" class="chip-presentacion${i === 0 ? " activo" : ""}" data-chip-presentacion="${i}">
+      <button type="button"
+        class="chip-presentacion${i === 0 ? " activo" : ""}${p.stock <= 0 ? " agotado" : ""}"
+        data-chip-presentacion="${i}"
+        ${p.stock <= 0 ? "disabled" : ""}>
         ${p.presentacion.replace("Decant ", "").replace("Botella ", "")}
       </button>`)
     .join("");
 
   const precioEl = modal.querySelector(".modal-producto__precio");
-  precioEl.textContent = formatearPrecio(producto.precios[0].precio);
+  precioEl.textContent = producto.precios[0].stock > 0 ? formatearPrecio(producto.precios[0].precio) : "Agotado";
   modal.dataset.presentacionSeleccionada = 0;
 
   grupoPresentacion.querySelectorAll("[data-chip-presentacion]").forEach((chip) => {
@@ -364,7 +385,8 @@ function abrirModalProducto(id) {
       const indice = Number(chip.dataset.chipPresentacion);
       grupoPresentacion.querySelectorAll("[data-chip-presentacion]").forEach((c) => c.classList.remove("activo"));
       chip.classList.add("activo");
-      precioEl.textContent = formatearPrecio(producto.precios[indice].precio);
+      const opcion = producto.precios[indice];
+precioEl.textContent = opcion.stock > 0 ? formatearPrecio(opcion.precio) : "Agotado";
       modal.dataset.presentacionSeleccionada = indice;
     });
   });
@@ -372,9 +394,13 @@ function abrirModalProducto(id) {
   const botonAgregar = modal.querySelector("[data-agregar-desde-modal]");
   botonAgregar.onclick = () => {
     const indice = Number(modal.dataset.presentacionSeleccionada || 0);
+    if (producto.precios[indice].stock <= 0) {
+      alert("Esta presentación está agotada. Elige otra.");
+      return;
+    }
     agregarAlCarrito(producto.id, indice);
     cerrarModalProducto();
-  };
+};
 
   modal.classList.add("abierto");
   document.body.classList.add("bloquear-scroll");
@@ -449,23 +475,18 @@ function renderizarCarrito() {
 /* --------------------------------------------------------------------------
    FORMULARIO DE PEDIDO: valida datos, arma el mensaje y abre WhatsApp
    -------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------
+   FORMULARIO DE PEDIDO: valida datos, arma el mensaje y abre WhatsApp
+   -------------------------------------------------------------------------- */
 function initFormularioPedido() {
   const formulario = document.getElementById("form-pedido");
   if (!formulario) return;
-
-  // Alterna qué bloque de método de pago se muestra
-  formulario.querySelectorAll('input[name="metodo-pago"]').forEach((radio) => {
-    radio.addEventListener("change", () => {
-      document.querySelectorAll(".detalle-pago").forEach((bloque) => {
-        bloque.hidden = bloque.dataset.pago !== radio.value;
-      });
-    });
-  });
 
   formulario.addEventListener("submit", (evento) => {
     evento.preventDefault();
 
     const carrito = obtenerCarrito();
+
     if (carrito.length === 0) {
       alert("Tu carrito está vacío. Agrega al menos un producto antes de finalizar el pedido.");
       return;
@@ -473,31 +494,23 @@ function initFormularioPedido() {
 
     const nombre = formulario.elements["nombre-cliente"].value.trim();
     const direccion = formulario.elements["direccion-cliente"].value.trim();
-    const metodoPagoInput = formulario.querySelector('input[name="metodo-pago"]:checked');
 
-    if (!nombre || !direccion || !metodoPagoInput) {
-      alert("Por favor completa tu nombre, dirección y el método de pago.");
+    if (!nombre || !direccion) {
+      alert("Por favor completa tu nombre y dirección.");
       return;
     }
-
-    const nombresMetodo = {
-      nequi: "Nequi",
-      bancolombia: "Bancolombia",
-      "contra-entrega": "Pago Contra Entrega"
-    };
 
     const mensaje = generarMensajeWhatsApp({
       carrito,
       nombre,
-      direccion,
-      metodoPago: nombresMetodo[metodoPagoInput.value]
+      direccion
     });
 
     const url = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(mensaje)}`;
+
     window.open(url, "_blank");
   });
 }
-
 /* Arma el texto exacto que se enviará por WhatsApp */
 function generarMensajeWhatsApp({ carrito, nombre, direccion, metodoPago }) {
   const lineas = carrito
@@ -513,7 +526,6 @@ function generarMensajeWhatsApp({ carrito, nombre, direccion, metodoPago }) {
     `Hola, quiero realizar el siguiente pedido en Perfumería Hades:\n\n` +
     `${lineas}\n\n` +
     `Total: ${formatearPrecio(total)}\n\n` +
-    `Método de pago: ${metodoPago}\n\n` +
     `Mi nombre es: ${nombre}\n` +
     `Mi dirección es: ${direccion}`
   );
