@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Tu Carrito | Perfumería Hades</title>
-  <meta name="description" content="Revisa tu pedido, elige el método de pago y finaliza tu compra por WhatsApp con Perfumería Hades.">
+  <meta name="description" content="Revisa tu pedido, elige el método de pago y finaliza tu compra con Perfumería Hades.">
   <link rel="icon" type="image/svg+xml" href="../img/logo/favicon.svg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -78,14 +78,15 @@
           </div>
           <div class="fila-total">
             <span>Envío</span>
-            <span>Se coordina por WhatsApp</span>
+            <span>Gratis</span>
           </div>
           <div class="fila-total fila-total--grande">
             <span>Total</span>
             <span id="carrito-total">$0</span>
           </div>
 
-          <form id="form-pedido" style="display:grid; gap:18px;">
+          <!-- FORMULARIO DE PAGO SIMULADO -->
+          <form id="payment-form" style="display:grid; gap:18px;">
             <div class="campo">
               <label for="nombre-cliente">Nombre completo</label>
               <input type="text" id="nombre-cliente" name="nombre-cliente" placeholder="Ej: Camila Ríos" required>
@@ -96,13 +97,40 @@
               <textarea id="direccion-cliente" name="direccion-cliente" rows="2" placeholder="Calle, número, barrio, ciudad" required></textarea>
             </div>
 
+            <!-- INICIO CAMPOS DE PAGO SIMULADO -->
+            <hr style="border: 0; border-top: 1px solid #e0e0e0; margin: 10px 0;">
+            <h3 style="font-size: 1.1rem; margin-bottom: -5px;">Datos de Tarjeta (Simulación)</h3>
             
-             
+            <div class="campo">
+              <label for="card-number">Número de Tarjeta</label>
+              <input type="text" id="card-number" required maxlength="16" placeholder="0000 0000 0000 0000">
+            </div>
+            
+            <div style="display: flex; gap: 15px;">
+              <div class="campo" style="flex: 1;">
+                <label for="card-exp">Vencimiento</label>
+                <input type="text" id="card-exp" required placeholder="MM/AA">
+              </div>
+              <div class="campo" style="flex: 1;">
+                <label for="card-cvc">CVC</label>
+                <input type="text" id="card-cvc" required maxlength="3" placeholder="123">
+              </div>
+            </div>
+            <!-- FIN CAMPOS DE PAGO -->
 
-            <button type="submit" class="boton boton--dorado boton--bloque">
-              Finalizar compra por WhatsApp
+            <!-- Mostrar el total dinámico -->
+            <div id="display-total-pago" style="margin-top: 5px; font-size: 1.2rem; font-weight: 600; text-align: center;">
+                <!-- El total se inyectará aquí con JS -->
+            </div>
+
+            <button type="submit" id="btn-pagar" class="boton boton--dorado boton--bloque">
+              Confirmar Pago
             </button>
+            
+            <div id="payment-message" style="display: none; margin-top: 10px; color: #28a745; font-weight: 600; text-align: center; padding: 10px; background-color: #e6f4ea; border-radius: 4px;"></div>
           </form>
+          <!-- FIN FORMULARIO PAGO SIMULADO -->
+
         </div>
       </div>
     </div>
@@ -152,9 +180,8 @@
     </div>
   </footer>
   
-
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../js/supabase-config.js"></script>
+  <script src="../js/supabase-config.js"></script>
   <script src="../js/productos.js"></script>
   <script src="../js/carrito.js"></script>
   <script src="../js/main.js"></script>

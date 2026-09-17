@@ -130,6 +130,90 @@ function vaciarCarrito() {
 
 /* Al cargar cualquier página, sincroniza el contador del header. */
 document.addEventListener("DOMContentLoaded", async () => {
-  await cargarProductos();
-  renderizarCarrito();
+  if (typeof cargarProductos === "function") {
+    await cargarProductos();
+  }
+  if (typeof renderizarCarrito === "function") {
+    renderizarCarrito();
+  }
+});
+
+/* ==========================================================================
+   INTEGRACIÓN DEL PAGO SIMULADO
+   ========================================================================== */
+document.addEventListener("DOMContentLoaded", () => {
+    const formPago = document.getElementById('payment-form');
+    const mensajePago = document.getElementById('payment-message');
+    const labelTotal = document.getElementById('display-total-pago');
+
+    // Función auxiliar para actualizar el texto del total a cobrar
+    function actualizarLabelTotal() {
+        if (labelTotal) {
+            const total = calcularTotalCarrito();
+            labelTotal.textContent = `Total a cobrar: $${total.toLocaleString()}`;
+        }
+    }
+
+    // Muestra el total a cobrar al cargar la página
+    actualizarLabelTotal();
+
+    // Sobrescribimos temporalmente renderizarCarrito (si existe) para que también actualice el total
+    if (typeof renderizarCarrito === "function") {
+        const originalRenderizarCarrito = renderizarCarrito;
+        renderizarCarrito = function() {
+            originalRenderizarCarrito();
+            actualizarLabelTotal();
+        };
+    }
+
+    if (formPago) {
+        formPago.addEventListener('submit', function(e) {
+            e.preventDefault(); 
+
+            if (contarUnidadesCarrito() === 0) {
+                alert("Tu carrito está vacío. Agrega productos antes de continuar.");
+                return;
+            }
+            
+            const btn = this.querySelector('#btn-pagar');
+            const nombre = document.getElementById('nombre-cliente').value;
+            
+            btn.textContent = 'Procesando pago...';
+            btn.disabled = true;
+            btn.style.opacity = '0.7';
+
+            // Simula el tiempo de procesamiento con el banco
+            setTimeout(() => {
+                mensajePago.textContent = `¡Pago aprobado, ${nombre}! Procesando tu pedido...`;
+                mensajePago.style.display = 'block';
+                btn.textContent = 'Pago Completado';
+                btn.style.backgroundColor = '#28a745';
+                btn.style.borderColor = '#28a745';
+                btn.style.color = '#fff';
+
+                // Vacía el carrito local y actualiza la vista
+                vaciarCarrito();
+                
+                if (typeof renderizarCarrito === "function") {
+                    renderizarCarrito();
+                }
+
+                // Limpiar los campos del formulario
+                formPago.reset();
+                actualizarLabelTotal();
+
+                // Restaurar el botón después de unos segundos
+                setTimeout(() => {
+                    mensajePago.style.display = 'none';
+                    btn.textContent = 'Confirmar Pago';
+                    btn.disabled = false;
+                    btn.style.opacity = '1';
+                    btn.style.backgroundColor = ''; // Restaura el color original de CSS
+                    btn.style.borderColor = '';
+                    btn.style.color = '';
+                }, 4000);
+
+            }, 2000); 
+        });
+    }
 });
