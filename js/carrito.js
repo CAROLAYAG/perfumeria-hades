@@ -237,3 +237,39 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+/* ==========================================================================
+   VALIDACIÓN Y FORMATEO DE CAMPOS DE TARJETA EN TIEMPO REAL
+   ========================================================================== */
+document.addEventListener("DOMContentLoaded", () => {
+    const inputCard = document.getElementById('card-number');
+    const inputExp = document.getElementById('card-exp');
+    const inputCvc = document.getElementById('card-cvc');
+
+    if (inputCard) {
+        inputCard.addEventListener('input', function(e) {
+            // Elimina todo lo que no sea número
+            let valor = e.target.value.replace(/\D/g, ''); 
+            // Agrega un espacio cada 4 dígitos
+            valor = valor.replace(/([0-9]{4})/g, '$1 ').trim(); 
+            e.target.value = valor;
+        });
+    }
+
+    if (inputExp) {
+        inputExp.addEventListener('input', function(e) {
+            let valor = e.target.value.replace(/\D/g, '');
+            // Agrega el '/' automáticamente después de los primeros 2 dígitos
+            if (valor.length > 2) {
+                valor = valor.substring(0,2) + '/' + valor.substring(2,4);
+            }
+            e.target.value = valor;
+        });
+    }
+
+    if (inputCvc) {
+        inputCvc.addEventListener('input', function(e) {
+            // Solo permite números
+            e.target.value = e.target.value.replace(/\D/g, '');
+        });
+    }
+});
