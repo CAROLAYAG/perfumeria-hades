@@ -139,25 +139,22 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 /* ==========================================================================
-   INTEGRACIÓN DEL PAGO SIMULADO
+   INTEGRACIÓN DE PAGO Y REDIRECCIÓN A WHATSAPP
    ========================================================================== */
 document.addEventListener("DOMContentLoaded", () => {
     const formPago = document.getElementById('payment-form');
     const mensajePago = document.getElementById('payment-message');
     const labelTotal = document.getElementById('display-total-pago');
 
-    // Función auxiliar para actualizar el texto del total a cobrar
     function actualizarLabelTotal() {
         if (labelTotal) {
             const total = calcularTotalCarrito();
-            labelTotal.textContent = `Total a cobrar: $${total.toLocaleString()}`;
+            labelTotal.textContent = `Total a pagar: $${total.toLocaleString()}`;
         }
     }
 
-    // Muestra el total a cobrar al cargar la página
     actualizarLabelTotal();
 
-    // Sobrescribimos temporalmente renderizarCarrito (si existe) para que también actualice el total
     if (typeof renderizarCarrito === "function") {
         const originalRenderizarCarrito = renderizarCarrito;
         renderizarCarrito = function() {
@@ -177,41 +174,64 @@ document.addEventListener("DOMContentLoaded", () => {
             
             const btn = this.querySelector('#btn-pagar');
             const nombre = document.getElementById('nombre-cliente').value;
+            const direccion = document.getElementById('direccion-cliente').value;
             
-            btn.textContent = 'Procesando pago...';
+            btn.textContent = 'Procesando con el banco...';
             btn.disabled = true;
             btn.style.opacity = '0.7';
 
-            // Simula el tiempo de procesamiento con el banco
             setTimeout(() => {
-                mensajePago.textContent = `¡Pago aprobado, ${nombre}! Procesando tu pedido...`;
+                // 1. Construir el mensaje de WhatsApp
+                const carrito = obtenerCarrito();
+                const total = calcularTotalCarrito();
+                
+                // Formateo del mensaje para WhatsApp usando saltos de línea (%0A) y negritas (*)
+                let textoWhatsApp = `¡Hola! Acabo de realizar una compra en *Perfumería Hades*.%0A%0A`;
+                textoWhatsApp += `*Datos de entrega:*%0A`;
+                textoWhatsApp += `- Nombre: ${nombre}%0A`;
+                textoWhatsApp += `- Dirección: ${direccion}%0A%0A`;
+                textoWhatsApp += `*Resumen del pedido:*%0A`;
+                
+                carrito.forEach(item => {
+                    textoWhatsApp += `▫️ ${item.cantidad}x ${item.nombre} (${item.presentacion}) - $${(item.precio * item.cantidad).toLocaleString()}%0A`;
+                });
+                
+                textoWhatsApp += `%0A*Total pagado:* $${total.toLocaleString()}%0A`;
+                textoWhatsApp += `_El pago fue procesado exitosamente por tarjeta._`;
+
+                // 2. Número de WhatsApp de la tienda (Reemplaza si es necesario, sin el '+')
+                const numeroWhatsApp = "573215480247";
+                const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${textoWhatsApp}`;
+
+                // 3. Mostrar confirmación visual breve
+                mensajePago.textContent = '¡Pago exitoso! Redirigiendo a WhatsApp...';
                 mensajePago.style.display = 'block';
-                btn.textContent = 'Pago Completado';
+                btn.textContent = 'Aprobado';
                 btn.style.backgroundColor = '#28a745';
                 btn.style.borderColor = '#28a745';
                 btn.style.color = '#fff';
 
-                // Vacía el carrito local y actualiza la vista
+                // 4. Limpiar el carrito
                 vaciarCarrito();
-                
                 if (typeof renderizarCarrito === "function") {
                     renderizarCarrito();
                 }
-
-                // Limpiar los campos del formulario
                 formPago.reset();
                 actualizarLabelTotal();
 
-                // Restaurar el botón después de unos segundos
+                // 5. Redirigir a WhatsApp
                 setTimeout(() => {
+                    window.open(urlWhatsApp, '_blank'); // Abre WhatsApp en nueva pestaña/app
+                    
+                    // Restaurar el botón en la vista original
                     mensajePago.style.display = 'none';
-                    btn.textContent = 'Confirmar Pago';
+                    btn.textContent = 'Procesar Pago';
                     btn.disabled = false;
                     btn.style.opacity = '1';
-                    btn.style.backgroundColor = ''; // Restaura el color original de CSS
+                    btn.style.backgroundColor = ''; 
                     btn.style.borderColor = '';
                     btn.style.color = '';
-                }, 4000);
+                }, 1000); // Redirige 1 segundo después de mostrar el éxito
 
             }, 2000); 
         });
